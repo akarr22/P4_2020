@@ -7,6 +7,7 @@
 ####
 
 from random import *
+import numpy as np
 
 team_name = 'Team Betrayal' # Only 10 chars displayed.
 strategy_name = 'Betray if pattern, otherwise collude'
@@ -35,11 +36,37 @@ def move(my_history, their_history, my_score, their_score):
     #     return "b"
     # else:
     #     return "c"
-    callNum = randint(0,1)
-    if callNum == 0:
-        call = "b"
-    if callNum == 1:
-        call = "c"
+    
+    calls = ["c", "b"]
+    weights = [0.5,0.5]
+    call = ""
+    print(my_history)
+    
+    if len(my_history) == 0 or len(my_history) == 1:
+        pass
+    if my_history[len(my_history)-2:len(my_history)] == "cc":
+        weights = [0.4,0.6]
+    elif my_history[len(my_history)-2:len(my_history)] == "cb":
+        weights = [0.6, 0.4]
+    elif my_history[len(my_history)-2:len(my_history)] == "bb":
+        weights = [0.7, 0.3]
+        
+    if their_history[len(their_history)-2:len(their_history)] == "cc":
+        weights = [0.6,0.4]
+    elif their_history[len(their_history)-2:len(their_history)] == "cb":
+        weights = [0.4, 0.6]
+    elif their_history[len(their_history)-2:len(their_history)] == "bb":
+        weights = [0.3, 0.7]
+    else:
+        weights= [0.5,0.5]
+    
+    call = np.random.choice(calls, p=weights)
+    print(call)
+        
+    # if callNum == 0:
+    #     call = "b"
+    # if callNum == 1:
+    #     call = "c"
         
     return call
 
