@@ -6,6 +6,8 @@
 #     move: A function that returns 'c' or 'b'
 ####
 
+from random import *
+
 team_name = 'Team Betrayal' # Only 10 chars displayed.
 strategy_name = 'Betray if pattern, otherwise collude'
 strategy_description = 'First 5 collude; if pattern of 2 betray or collude in a row in the past 5 moves, betray; otherwise collude'
@@ -25,17 +27,22 @@ def move(my_history, their_history, my_score, their_score):
     
     # Analyze my_history and their_history and/or my_score and their_score.
     # Decide whether to return 'c' or 'b'.
-    if len(my_history) < 5:
-        return "c"
-    elif "cc" in their_history [-6: -1]:
-        return "b"
-    elif "bb" in their_history [-6: -1]:
-        return "b"
-    else:
-        return "c"
+    # if len(my_history) < 5:
+    #     return "c"
+    # elif "cc" in their_history [-6: -1]:
+    #     return "b"
+    # elif "bb" in their_history [-6: -1]:
+    #     return "b"
+    # else:
+    #     return "c"
+    callNum = randint(0,1)
+    if callNum == 0:
+        call = "b"
+    if callNum == 1:
+        call = "c"
+        
+    return call
 
-
-    
 
     
 def test_move(my_history, their_history, my_score, their_score, result):
@@ -62,7 +69,7 @@ if __name__ == '__main__':
               my_score=0,
               their_score=0,
               result='b'):
-         print 'Test passed'
+         print ('Test passed')
      # Test 2: Continue betraying if they collude despite being betrayed.
     test_move(my_history='bbb',
               their_history='ccc', 
