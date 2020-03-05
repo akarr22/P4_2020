@@ -9,9 +9,9 @@
 from random import *
 import numpy as np
 
-team_name = 'Team Betrayal' # Only 10 chars displayed.
-strategy_name = 'Betray if pattern, otherwise collude'
-strategy_description = 'First 5 collude; if pattern of 2 betray or collude in a row in the past 5 moves, betray; otherwise collude'
+team_name = 'Team AK' # Only 10 chars displayed.
+strategy_name = 'Let god decide'
+strategy_description = 'Seriously. Let god decide'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
