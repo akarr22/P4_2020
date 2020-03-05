@@ -9,9 +9,9 @@
 from random import *
 import numpy as np
 
-team_name = 'Team Betrayal' # Only 10 chars displayed.
-strategy_name = 'Betray if pattern, otherwise collude'
-strategy_description = 'First 5 collude; if pattern of 2 betray or collude in a row in the past 5 moves, betray; otherwise collude'
+team_name = 'Team AK' # Only 10 chars displayed.
+strategy_name = 'Copy Kat'
+strategy_description = 'You tell us (Copy the move that the other player made last)'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
@@ -28,45 +28,37 @@ def move(my_history, their_history, my_score, their_score):
     
     # Analyze my_history and their_history and/or my_score and their_score.
     # Decide whether to return 'c' or 'b'.
-    # if len(my_history) < 5:
-    #     return "c"
-    # elif "cc" in their_history [-6: -1]:
-    #     return "b"
-    # elif "bb" in their_history [-6: -1]:
-    #     return "b"
-    # else:
-    #     return "c"
+    # calls = ["c", "b"]
+    # weights = [0.5,0.5]
+    # print(my_history)
     
-    calls = ["c", "b"]
-    weights = [0.5,0.5]
+    # if my_history[len(my_history)-2:len(my_history)] == "cc":
+    #     weights = [0.3,0.7]
+    # elif my_history[len(my_history)-2:len(my_history)] == "cb":
+    #     weights = [0.6, 0.4]
+    # elif my_history[len(my_history)-2:len(my_history)] == "bb":
+    #     weights = [0.7, 0.3]
+    # elif len(their_history) > 5:
+    #     if their_history[len(their_history)-1:len(their_history)] == "cc":
+    #         weights = [1, 0]
+    #         print("hi")
+    #     elif their_history[len(their_history)-1:len(their_history)] == "cb":
+    #         weights = [0.1, 0.9]
+    #         print("hi")
+    #     elif their_history[len(their_history)-1:len(their_history)] == "bb":
+    #         weights = [0.2, 0.8]
+    #         print("hi")
+    #     else:
+    #         weights= [0.5,0.5]
+    # 
+    #     call = np.random.choice(calls, p=weights)
+    
     call = ""
-    print(my_history)
     
-    if len(my_history) == 0 or len(my_history) == 1:
-        pass
-    if my_history[len(my_history)-2:len(my_history)] == "cc":
-        weights = [0.4,0.6]
-    elif my_history[len(my_history)-2:len(my_history)] == "cb":
-        weights = [0.6, 0.4]
-    elif my_history[len(my_history)-2:len(my_history)] == "bb":
-        weights = [0.7, 0.3]
-        
-    if their_history[len(their_history)-2:len(their_history)] == "cc":
-        weights = [0.6,0.4]
-    elif their_history[len(their_history)-2:len(their_history)] == "cb":
-        weights = [0.4, 0.6]
-    elif their_history[len(their_history)-2:len(their_history)] == "bb":
-        weights = [0.3, 0.7]
+    if (len(their_history) == 0) or (len(their_history) == 1):
+        call = "b"
     else:
-        weights= [0.5,0.5]
-    
-    call = np.random.choice(calls, p=weights)
-    print(call)
-        
-    # if callNum == 0:
-    #     call = "b"
-    # if callNum == 1:
-    #     call = "c"
+        call = their_history[len(their_history)-1]
         
     return call
 
