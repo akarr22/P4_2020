@@ -11,7 +11,7 @@ import numpy as np
 
 team_name = 'Team AK' # Only 10 chars displayed.
 strategy_name = 'Copy Kat'
-strategy_description = 'You tell us (Copy the move that the other player made last)'
+strategy_description = 'If other team made the same call 3 times in a row call "b" else call the move that was last made by the other team.'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
@@ -28,9 +28,9 @@ def move(my_history, their_history, my_score, their_score):
     
     # Analyze my_history and their_history and/or my_score and their_score.
     # Decide whether to return 'c' or 'b'.
+    call = ""
     # calls = ["c", "b"]
     # weights = [0.5,0.5]
-    # print(my_history)
     
     # if my_history[len(my_history)-2:len(my_history)] == "cc":
     #     weights = [0.3,0.7]
@@ -38,27 +38,23 @@ def move(my_history, their_history, my_score, their_score):
     #     weights = [0.6, 0.4]
     # elif my_history[len(my_history)-2:len(my_history)] == "bb":
     #     weights = [0.7, 0.3]
-    # elif len(their_history) > 5:
-    #     if their_history[len(their_history)-1:len(their_history)] == "cc":
-    #         weights = [1, 0]
-    #         print("hi")
-    #     elif their_history[len(their_history)-1:len(their_history)] == "cb":
-    #         weights = [0.1, 0.9]
-    #         print("hi")
-    #     elif their_history[len(their_history)-1:len(their_history)] == "bb":
-    #         weights = [0.2, 0.8]
-    #         print("hi")
-    #     else:
-    #         weights= [0.5,0.5]
-    # 
-    #     call = np.random.choice(calls, p=weights)
-    
-    call = ""
-    
     if (len(their_history) == 0) or (len(their_history) == 1):
+        call = "b"
+    elif their_history[len(their_history)-3:len(their_history)] == "ccc":
+        call = "b"
+    elif their_history[len(their_history)-3:len(their_history)] == "bbb":
         call = "b"
     else:
         call = their_history[len(their_history)-1]
+
+    # call = np.random.choice(calls, p=weights)
+    
+    
+    
+    # if (len(their_history) == 0) or (len(their_history) == 1):
+    #     call = "b"
+    # else:
+    #     call = their_history[len(their_history)-1]
         
     return call
 
